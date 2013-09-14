@@ -26,7 +26,6 @@ class Game
 
   def kill_player(id)
     if id!=-1
-      self.player_hash.delete(id)
       for player in players
         if player.id.to_i==id.to_i
           players.delete(player)
