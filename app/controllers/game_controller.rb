@@ -58,7 +58,7 @@ class GameController < ApplicationController
     hash["finished"]=false
     if @@g.night==false
       hash["finished"]=true
-      hash["victim"]=@@g.mafia_kill
+      hash["victim"]=@@g.mafia_kill.to_i
     end
     render :json=>hash
   end
@@ -70,7 +70,7 @@ class GameController < ApplicationController
   end
   
   def peasant_kill
-    render :json=>@@g.peasant_kill
+    render :json=>@@g.peasant_kill.to_i
   end
 
   def get_dead_players
