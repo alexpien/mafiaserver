@@ -51,7 +51,7 @@ class Game
 
   def begin_next_round
     self.votes={}
-    self.end_time=Time.zone.now.to_i+10
+    self.end_time=Time.zone.now.to_i+20
   end
   
 
