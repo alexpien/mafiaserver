@@ -10,6 +10,7 @@ class Game
     self.player_hash={}
     self.night=false
     self.game_over=false
+    self.end_time=0
   end
 
   def add_player(n)
