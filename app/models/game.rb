@@ -33,7 +33,6 @@ class Game
   end
 
   def begin_next_round
-    @voted=0
     self.votes={}
     @end_time=Time.now.to_i+30
   end
@@ -48,15 +47,14 @@ class Game
     maxplayer=-1
     for id in tally.keys
       if tally[id]>max
-        max=tally
+        max=tally[id]
         maxplayer=id
-      elsif
-        tally[id]==max
+      elsif tally[id]==max
         maxplayer=-1
       end
 
     end
-    self.kill_player(max_player)
+    self.kill_player(maxplayer)
   end
 
   
@@ -68,7 +66,7 @@ class Game
     hash={}
     hash["votes"]=self.votes
     hash["finished"]=false
-    if Time.now.to_i>@end_time
+    if Time.now.to_i > @end_time
       self.end_round
     end
     
