@@ -1,31 +1,34 @@
 class Game
   
-  attr_accessor :num_players, :players, :votes, :mafia
+  attr_accessor :players, :votes, :mafia, :dead_players, :player_hash
   
   def initialize
-    self.num_players=0
     self.players=[]
     self.mafia=nil
+    self.dead_players=[]
+    self.votes={}
+    self.player_hash={}
   end
 
   def add_player(n)
     p = Player.new
     p.name=n
-    self.num_players+=1
-    p.id=self.num_players
+    p.id=self.players.length+1
     self.players << p
-
+    self.player_hash[self.players.length]=n
     return p
   end
 
   def kill_player(id)
-    self.num_players-=1
-    players.delete(id)
+    if id!=-1
+      self.players.delete(id)
+      self.dead_players.add(id)
+    end
   end
   
 
   def start
-    self.mafia=1+rand(self.num_players)
+    self.mafia=1+rand(self.players.length)
     self.begin_next_round
   end
 
@@ -37,16 +40,23 @@ class Game
   
   def end_round
     tally={}
-    for vote in votes do
+    for vote in votes.keys do
+      tally[votes[vote]]||=0
       tally[votes[vote]]+=1
     end
     max=0
-    for id in tally
+    maxplayer=-1
+    for id in tally.keys
       if tally[id]>max
         max=tally
+        maxplayer=id
+      elsif
+        tally[id]==max
+        maxplayer=-1
       end
 
     end
+    self.kill_player(max_player)
   end
 
   
@@ -55,11 +65,14 @@ class Game
   end
 
   def get_votes
+    hash={}
+    hash["votes"]=self.votes
+    hash["finished"]=false
     if Time.now.to_i>@end_time
       self.end_round
-    else
-      self.votes
     end
+    
+    hash
 
   end
 
