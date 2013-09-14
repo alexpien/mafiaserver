@@ -1,10 +1,8 @@
 class GameController < ApplicationController
   
   def join
-      @@g ||= Game.new
       me=@@g.add_player(params[:name])
       render :json=> {:id=>me.id,:name=>me.name}
-   
   end
 
   def start_game
@@ -15,7 +13,7 @@ class GameController < ApplicationController
   end
 
   def reset
-    @@g=nil
+    @@g=Game.new
     render :nothing=>true
   end
   
@@ -23,19 +21,34 @@ class GameController < ApplicationController
     render :json=>@@g.players
   end
 
-  def vote(voter,kill)
-    @@g.vote(voter,kill)
+  def get_player_hash
+    render :json=>@@g.player_hash
+  end
+  def vote
+    @@g.vote(params[:voter],params[:kill])
+    render :nothing=>true
   end
  
   def begin_next_round
     @@g.begin_next_round
+    render :nothing=>true
+  end
+  
+  def mafia_kill
+    @@g.kill_player(params[:id])
   end
 
 
   def vote_results
-    @@g.get_votes
-  end
 
+    render :json=>@@g.get_votes
+    
+  end
+  
+  def get_dead_players
+    render :json=>@@g.dead_players
+  end
+  
   def has_game_started
     id=params[:id].to_i
     if @@g.mafia
@@ -48,4 +61,7 @@ class GameController < ApplicationController
       render :json=>{:result=>"waiting"}
     end
   end
+
+  
+  
 end
