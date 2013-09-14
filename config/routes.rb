@@ -13,7 +13,7 @@ Mafia::Application.routes.draw do
   get 'reset'=>'game#reset'
   get 'players'=>'game#get_players'
   get 'begin'=>'game#has_game_started'
-  get 'votes'=>'game#vote_results'
+  get 'results'=>'game#vote_results'
   get 'playerhash'=>'game#get_player_hash'
   get 'vote'=>'game#vote'
   get 'dead'=>'game#get_dead_players'
