@@ -21,6 +21,7 @@ class Game
     p
   end
 
+
  
 
   def kill_player(id)
@@ -74,6 +75,7 @@ class Game
     end
     self.kill_player(maxplayer)
     self.night = true
+    return maxplayer
   end
 
 
@@ -89,7 +91,8 @@ class Game
     hash["finished"]=false
     if Time.zone.now.to_i > @end_time
       hash["finished"]=true
-      self.end_round
+      
+      hash["victim"]=self.end_round
     end
     
     hash
