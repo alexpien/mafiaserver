@@ -44,7 +44,8 @@ class Game
   
 
   def start
-    self.mafia=1+rand(self.players.length)
+    #self.mafia=1+rand(self.players.length)
+    self.mafia=2
     self.begin_next_round
   end
 
