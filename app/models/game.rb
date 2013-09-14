@@ -67,6 +67,7 @@ class Game
     hash["votes"]=self.votes
     hash["finished"]=false
     if Time.now.to_i > @end_time
+      hash["finished"]=true
       self.end_round
     end
     
