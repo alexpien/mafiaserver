@@ -68,7 +68,6 @@ class Game
     hash["finished"]=false
     if Time.zone.now.to_i > @end_time
       hash["finished"]=true
-      self.end_round
     end
     
     hash
