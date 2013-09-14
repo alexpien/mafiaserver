@@ -39,9 +39,9 @@ class Game
   
   def end_round
     tally={}
-    for vote in votes.keys do
-      tally[votes[vote]]||=0
-      tally[votes[vote]]+=1
+    for vote in self.votes.keys do
+      tally[self.votes[vote]]||=0
+      tally[self.votes[vote]]+=1
     end
     max=0
     maxplayer=-1
@@ -68,6 +68,7 @@ class Game
     hash["finished"]=false
     if Time.zone.now.to_i > @end_time
       hash["finished"]=true
+      self.end_round
     end
     
     hash
