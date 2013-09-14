@@ -1,6 +1,6 @@
 class Game
   
-  attr_accessor :players, :votes, :mafia, :dead_players, :player_hash
+  attr_accessor :players, :votes, :mafia, :dead_players, :player_hash,:night,:mafia_kill, :game_over
   
   def initialize
     self.players=[]
@@ -8,6 +8,8 @@ class Game
     self.dead_players=[]
     self.votes={}
     self.player_hash={}
+    self.night=false
+    self.game_over=false
   end
 
   def add_player(n)
@@ -16,14 +18,28 @@ class Game
     p.id=self.players.length+1
     self.players << p
     self.player_hash[self.players.length]=n
-    return p
+    p
   end
+
+ 
 
   def kill_player(id)
     if id!=-1
-      self.players.delete(id)
-      self.dead_players.add(id)
+      self.player_hash.delete(id)
+      for player in players
+        if player.id.to_i==id.to_i
+          players.delete(player)
+        end
+      end
+      self.dead_players<<(id)
     end
+    if id.to_i==self.mafia.to_i
+      self.game_over=true
+    end
+    if self.players.length==2
+      self.game_over=true
+    end
+
   end
   
 
@@ -37,6 +53,8 @@ class Game
     @end_time=Time.zone.now.to_i+30
   end
   
+
+
   def end_round
     tally={}
     for vote in self.votes.keys do
@@ -55,7 +73,10 @@ class Game
 
     end
     self.kill_player(maxplayer)
+    self.night = true
   end
+
+
 
   
   def vote(voter,kill)
@@ -74,7 +95,6 @@ class Game
     hash
 
   end
-
 
   
 end
