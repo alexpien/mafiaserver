@@ -5,6 +5,10 @@ class GameController < ApplicationController
       render :json=> {:id=>me.id,:name=>me.name}
   end
 
+  def end
+    render :json=>@@g.end_time.to_i
+  end
+
   def start_game
     if not @@g.mafia
       @@g.start
