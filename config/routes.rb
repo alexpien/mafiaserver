@@ -21,6 +21,7 @@ Mafia::Application.routes.draw do
   get 'night'=>'game#is_night'
   get 'gameover'=>'game#gameover'
   get 'startnextround'=>'game#begin_next_round'
+  get 'roundend'=> 'game#end_time'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

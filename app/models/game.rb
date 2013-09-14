@@ -1,6 +1,6 @@
 class Game
   
-  attr_accessor :players, :votes, :mafia, :dead_players, :player_hash,:night,:mafia_kill, :game_over
+  attr_accessor :players, :votes, :mafia, :dead_players, :player_hash,:night,:mafia_kill, :game_over, :end_time
   
   def initialize
     self.players=[]
@@ -50,7 +50,7 @@ class Game
 
   def begin_next_round
     self.votes={}
-    @end_time=Time.zone.now.to_i+30
+    self.end_time=Time.zone.now.to_i+10
   end
   
 
@@ -88,7 +88,7 @@ class Game
     hash={}
     hash["votes"]=self.votes
     hash["finished"]=false
-    if Time.zone.now.to_i > @end_time
+    if Time.zone.now.to_i > self.end_time
       hash["finished"]=true
       
       hash["victim"]=self.end_round
