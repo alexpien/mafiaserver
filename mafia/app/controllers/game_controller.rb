@@ -37,8 +37,9 @@ class GameController < ApplicationController
 
   def has_game_started
     id=params[:id]
+    puts @@g.mafia
     if @@g.mafia
-      if id==@@g.mafia
+      if id.to_i==@@g.mafia
         render :json=>{:result=>"mafia"}
       else
         render :json=>{:result=>"peasant"}
