@@ -15,6 +15,9 @@ class GameController < ApplicationController
     end
     render :nothing=>true
   end
+  def who
+    render :json=>@@g.mafia
+  end
 
   def reset
     @@g=Game.new

@@ -19,6 +19,7 @@ Mafia::Application.routes.draw do
   get 'dead'=>'game#get_dead_players'
   get 'mafia'=>'game#mafia_kill'
   get 'night'=>'game#is_night'
+  get 'who'=>'game#who'
   get 'gameover'=>'game#gameover'
   get 'startnextround'=>'game#begin_next_round'
   get 'roundend'=> 'game#end'
