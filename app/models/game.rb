@@ -34,7 +34,7 @@ class Game
 
   def begin_next_round
     self.votes={}
-    @end_time=Time.now.to_i+30
+    @end_time=Time.zone.now.to_i+30
   end
   
   def end_round
@@ -66,7 +66,7 @@ class Game
     hash={}
     hash["votes"]=self.votes
     hash["finished"]=false
-    if Time.now.to_i > @end_time
+    if Time.zone.now.to_i > @end_time
       hash["finished"]=true
       self.end_round
     end
