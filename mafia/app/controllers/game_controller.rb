@@ -1,9 +1,10 @@
 class GameController < ApplicationController
   
   def join
-    @@g ||= Game.new
-    me=@@g.add_player(params[:name])
-    render :json=> {:id=>me.id,:name=>me.name}
+      @@g ||= Game.new
+      me=@@g.add_player(params[:name])
+      render :json=> {:id=>me.id,:name=>me.name}
+   
   end
 
   def start_game
@@ -36,10 +37,9 @@ class GameController < ApplicationController
   end
 
   def has_game_started
-    id=params[:id]
-    puts @@g.mafia
+    id=params[:id].to_i
     if @@g.mafia
-      if id.to_i==@@g.mafia
+      if id==@@g.mafia
         render :json=>{:result=>"mafia"}
       else
         render :json=>{:result=>"peasant"}
