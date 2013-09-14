@@ -35,9 +35,26 @@ class GameController < ApplicationController
   end
   
   def mafia_kill
-    @@g.kill_player(params[:id])
+    @@g.kill_player(params[:kill])
+    @@g.mafia_kill=(params[:kill])
+    @@g.night=false
+    render :nothing=>true
   end
 
+  def gameover
+
+    render :json=> @@g.game_over
+  end
+
+  def is_night
+    hash={}
+    hash["finished"]=false
+    if @@g.night==false
+      hash["finished"]=true
+      hash["victim"]=@@g.mafia_kill
+    end
+    render :json=>hash
+  end
 
   def vote_results
 
@@ -45,6 +62,10 @@ class GameController < ApplicationController
     
   end
   
+  def peasant_kill
+    render :json=>@@g.peasant_kill
+  end
+
   def get_dead_players
     render :json=>@@g.dead_players
   end
@@ -62,6 +83,6 @@ class GameController < ApplicationController
     end
   end
 
-  
+
   
 end

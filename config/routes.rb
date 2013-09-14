@@ -17,6 +17,10 @@ Mafia::Application.routes.draw do
   get 'playerhash'=>'game#get_player_hash'
   get 'vote'=>'game#vote'
   get 'dead'=>'game#get_dead_players'
+  get 'mafia'=>'game#mafia_kill'
+  get 'night'=>'game#is_night'
+  get 'gameover'=>'game#gameover'
+  get 'startnextround'=>'game#begin_next_round'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
