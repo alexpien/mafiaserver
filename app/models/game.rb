@@ -2,6 +2,18 @@ class Game
   
   attr_accessor :players, :votes, :mafia, :dead_players, :player_hash,:night,:mafia_kill, :game_over, :end_time
   
+  #TODO
+  #manage game state though stage system, indices in array
+#don’t allow new players after game start
+#reset the game after finishing a round
+#must be 4 players to start
+#have more than one mafia (how do mafia agree)
+#extra game options (doctor, detective)
+#status page
+#document API
+#allow timed or untimed game
+
+
   def initialize
     self.players=[]
     self.mafia=nil
@@ -20,8 +32,6 @@ class Game
     self.player_hash[self.players.length]=n
     p
   end
-
-
  
 
   def kill_player(id)
@@ -89,7 +99,7 @@ class Game
     hash={}
     hash["votes"]=self.votes
     hash["finished"]=false
-    if Time.zone.now.to_i > self.end_time
+    if Time.now.to_i > self.end_time
       hash["finished"]=true
       
       hash["victim"]=self.end_round
